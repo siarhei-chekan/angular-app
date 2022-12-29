@@ -15,20 +15,20 @@ export class AppComponent implements OnInit {
   loading = false;
   queryString = '';
 
-  products$: Observable<IProduct[]>;
+  // products$: Observable<IProduct[]>;
 
   constructor(
-    private productService: ProductService,
+    public productService: ProductService,
     public modalService: ModalService
   ) {
   }
 
   ngOnInit(): void {
     this.loading = true;
-    // this.productService.getAll().subscribe(products => {
-    //   this.products = products;
-    //   this.loading = false;
-    // });
-    this.products$ = this.productService.getAll().pipe(tap(() => this.loading = false));
+    this.productService.getAll().subscribe(() => {
+      // this.products = products;
+      this.loading = false;
+    });
+    // this.products$ = this.productService.getAll().pipe(tap(() => this.loading = false));
   }
 }
